@@ -2,6 +2,9 @@ smartpcp-system-checker
 
 Central class is defined in checker.py.
 
+> [! Attention]
+> results.csv must be created inside kevlin_checker
+
 # Uses of Kelvin Client in checker.py
 
 Get all assets that exist on the Kelvin tenant of a specific type
