@@ -1,5 +1,29 @@
 app:
   kelvin:
+    configuration:
+      debug: True
+      execution_time: # Timezone is UTC
+        hour: 22 # 22:15 UTC is 15 min after sigcon model execution
+        minute: 15
+        sleep: 60 # Sleep time in sec.
+      timezone: UTC
+      appname: 
+      assets:
+        type: well 
+        test_asset: # asset name. Just relevant for debugging
+      metrics:
+        first_metric: recommended_speed
+        second_metric: pump_speed
+        result_metric: matching-speed
+      control_changes:
+        controlchange_type: workload # workload = closed loop controlchanges. user = open loop controlchanges
+      checking:
+        interval: 23 # Interval in hours for controlchanges to consider
+        grace_interval: 1
+      mail:
+        test_mode: True
+        test_receiver: 
+        receiver: # List of email adresses seperated by comma, without any spaces in between
     language:
       python:
         entry_point: kelvin_checker:App
@@ -12,3 +36,21 @@ info:
   title: kelvin-checker
   version: 1.0.0
 spec_version: 4.10.0
+
+system:
+  environment_vars:
+    - name: KELVIN_URL
+      value: <% secrets.kelvin-url %>
+    - name: KELVIN_CLIENT_ID
+      value: <% secrets.kelvin-client-id %>
+    - name: KELVIN_CLIENT_SECRET
+      value: <% secrets.kelvin-client-secret %>
+    - name: SMTP_SENDER
+      value: <% secrets.smtp-sender %>
+    - name: SMTP_SERVER
+      value: <% secrets.smtp-server %>
+    - name: SMTP_USERNAME
+      value: <% secrets.smtp-username %>
+    - name: SMTP_PASSWORD
+      value: <% secrets.smtp-password %>
+  privileged: false
