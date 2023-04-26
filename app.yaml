@@ -1,0 +1,14 @@
+app:
+  kelvin:
+    language:
+      python:
+        entry_point: kelvin_checker:App
+        requirements: requirements.txt
+      type: python
+  type: kelvin
+info:
+  description: kelvin-checker
+  name: kelvin-checker
+  title: kelvin-checker
+  version: 1.0.0
+spec_version: 4.10.0
