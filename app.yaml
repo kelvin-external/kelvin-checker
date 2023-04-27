@@ -34,7 +34,7 @@ info:
   description: kelvin-checker
   name: kelvin-checker
   title: kelvin-checker
-  version: 1.0.2
+  version: 1.0.10
 spec_version: 4.10.0
 
 system:

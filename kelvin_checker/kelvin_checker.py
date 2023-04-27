@@ -96,7 +96,7 @@ class App(DataApplication):
             metric_name = [first_metric,second_metric]
             metrics_check = checker.get_last_metrics_pivot(metric_list = metric_name, interval = interval, grace_interval=grace_interval)
 
-            metrics_check.loc[metrics_check['speed_match']==False].to_csv('results.csv')
+            # metrics_check.loc[metrics_check['speed_match']==False].to_csv('results.csv')
             # print results: only mismatches
             
             print(f'Investigating closed loop wells at {now}:\n')
@@ -115,7 +115,7 @@ class App(DataApplication):
             timezone = self.config.timezone
             mailtime = now.astimezone(pytz.timezone(timezone)).strftime("%b-%d-%Y")
 
-            attachment_path = "results.csv"
+            # attachment_path = "results.csv"
 
             asset_table = ''
             for asset in metrics_check.loc[metrics_check['speed_match']==False].index.to_list():
@@ -135,10 +135,10 @@ class App(DataApplication):
             msg.set_content(body)
 
 
-            mime_type, _ = mimetypes.guess_type(attachment_path)
-            mime_type, mime_subtype = mime_type.split('/', 1)
-            with open(attachment_path, 'rb') as ap:
-                msg.add_attachment(ap.read(), maintype=mime_type, subtype=mime_subtype,filename=os.path.basename(attachment_path))
+            # mime_type, _ = mimetypes.guess_type(attachment_path)
+            # mime_type, mime_subtype = mime_type.split('/', 1)
+            # with open(attachment_path, 'rb') as ap:
+            #     msg.add_attachment(ap.read(), maintype=mime_type, subtype=mime_subtype,filename=os.path.basename(attachment_path))
 
             print(f"Sending email to: {', '.join(receiver)}")
 
@@ -155,7 +155,7 @@ class App(DataApplication):
                 value = metrics_check['speed_match'][asset]
                 speed_match = f'{value}'
 
-                timestamp = datetime.now(timezone.utc)
+                timestamp = datetime.now()
                 
                 checker.send_metric(asset_name=asset_name, name=result_metric, data_type="raw.boolean",value = speed_match, timestamp=timestamp)
 
@@ -172,7 +172,7 @@ class App(DataApplication):
 
                 speed_match = ""
 
-                timestamp = datetime.now(timezone.utc)
+                timestamp = datetime.now()
 
                 checker.send_metric(asset_name=asset_name, name=result_metric, data_type="raw.boolean",value = speed_match, timestamp=timestamp)
 
